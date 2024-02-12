@@ -2,7 +2,10 @@
   "name": "@fashion_admin_panel/views",
   "private": true,
   "version": "1.0.0",
+  "description": "fashion rocks",
   "type": "module",
+  "repository": "https://github.com/NyAndriaX/scable-ecommerce/tree/main",
+  "author": "NyAndriaX",
   "license": "UNLICENSED",
   "scripts": {
     "dev": "vite",
