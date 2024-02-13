@@ -1,6 +1,6 @@
 const NavBar = () => {
   return(
-    <nav>Navigation</nav>
+    <nav className="border border-solid border-gray-500">Navigation</nav>
   )
 }
 
