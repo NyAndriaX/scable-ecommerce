@@ -1,7 +1,16 @@
-const NavBar = () => {
-  return(
-    <nav className="border border-solid border-gray-500">Navigation</nav>
-  )
-}
+import { useState } from 'react';
+import MenuMobile from './mobile/MenuMobile';
+import MenuDesktop from './desktop/MenuDesktop';
 
-export default NavBar
+const NavBar = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  return (
+    <header className="border-b">
+      <MenuDesktop setIsOpen={setIsOpen} />
+      <MenuMobile isOpen={isOpen} setIsOpen={setIsOpen} />
+    </header>
+  );
+};
+
+export default NavBar;
