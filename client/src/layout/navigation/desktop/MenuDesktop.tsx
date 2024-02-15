@@ -10,10 +10,10 @@ interface MenuDesktopProps {
 
 const MenuDesktop: React.FC<MenuDesktopProps> = ({ setIsOpen }) => {
   return (
-    <nav className="relative bg-white">
+    <nav className="relative">
       <div
         aria-label="Top"
-        className="mx-auto max-w-7xl border-gray-200 bg-white px-4 sm:px-6 lg:px-8"
+        className="mx-auto max-w-7xl border-gray-200 bg-black px-4 sm:px-6 lg:px-8"
       >
         {/* Mobile hamburger menu */}
         <div className="flex h-16 items-center">

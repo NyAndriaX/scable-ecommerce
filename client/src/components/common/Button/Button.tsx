@@ -1,5 +1,8 @@
 import React from 'react';
+
+type ButtonType = 'submit' | 'reset' | 'button' | undefined;
 interface ButtonPros {
+  type: ButtonType;
   text: string;
   onClick?: (e?: any) => void;
   disabled?: boolean;
@@ -10,6 +13,7 @@ interface ButtonPros {
 type IconType = () => JSX.Element;
 
 export default function Button({
+  type,
   text,
   onClick,
   disabled,
@@ -18,8 +22,9 @@ export default function Button({
 }: ButtonPros) {
   return (
     <button
+      type={type}
       onClick={onClick}
-      className={`flex max-h-[44px] items-center justify-center rounded-md transition-all ${
+      className={`flex max-h-[44px] items-center justify-center transition-all ${
         className ?? ''
       }`}
       disabled={disabled}

@@ -1,8 +1,28 @@
-const Logo = () => {
+import React from 'react';
+import LogoWhite from '@/assets/logos/Logo-white.png';
+
+interface LogoProps {
+  color?: string;
+  width?: string;
+}
+
+const Logo: React.FC<LogoProps> = ({ color, width }) => {
   return (
-    <h3 className="text-green-800 font-bold text-lg">
-      Fashion <span className="text-yellow-400">Era</span>
-    </h3>
+    <React.Fragment>
+      {color === 'white' ? (
+        <img
+          src={LogoWhite}
+          alt="logo"
+          style={{ width: width ? '100px' : "100px", height: 'auto' }}
+        />
+      ) : (
+        <img
+          src={LogoWhite}
+          alt="logo"
+          style={{ width: "100px", height: '100px' }}
+        />
+      )}
+    </React.Fragment>
   );
 };
 

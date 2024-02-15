@@ -1,16 +1,11 @@
-import { Link, useLocation } from 'react-router-dom';
-import Logo from '@/components/common/Logo/Logo';
+import { Link } from 'react-router-dom';
+// import Logo from '@/components/common/Logo/Logo';
 
 export default function Footer() {
-  const navigation = useLocation();
 
   return (
     <footer
-      className={`mt-auto border-t border-gray-200 ${
-        navigation.pathname === '/login' || navigation.pathname === '/register'
-          ? 'hidden'
-          : 'block'
-      }`}
+      className={`mt-auto border-t border-gray-200`}
     >
       <div className="mx-auto flex flex-col items-center ">
         {/* Top area: Blocks */}
