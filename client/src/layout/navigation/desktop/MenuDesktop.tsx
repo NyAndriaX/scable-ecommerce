@@ -55,14 +55,14 @@ const MenuDesktop: React.FC<MenuDesktopProps> = ({ setIsOpen }) => {
               <>
                 <Link
                   to="/login"
-                  className="text-sm font-medium text-gray-700 hover:text-gray-800"
+                  className="text-sm font-medium text-white hover:text-opacity-80"
                 >
                   Sign in
                 </Link>
                 <span className="h-6 w-px bg-gray-200" aria-hidden="true" />
                 <Link
                   to="/register"
-                  className="text-sm font-medium text-gray-700 hover:text-gray-800"
+                  className="text-sm font-medium text-white hover:text-opacity-80"
                 >
                   Create account
                 </Link>
@@ -74,7 +74,7 @@ const MenuDesktop: React.FC<MenuDesktopProps> = ({ setIsOpen }) => {
           <div className="ml-4 flow-root lg:ml-6">
             <Link to="/carts" className="group -m-2 flex items-center p-2">
               <ShoppingBagIcon
-                className="h-6 w-6 shrink-0 text-gray-400 group-hover:text-gray-500"
+                className="h-6 w-6 shrink-0 text-white group-hover:text-opacity-80"
                 aria-hidden="true"
               />
               {/* <CartStatus /> */}

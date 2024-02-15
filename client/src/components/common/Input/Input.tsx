@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useState, forwardRef } from 'react';
+import {
+  ExclamationCircleIcon,
+  EyeIcon,
+  EyeSlashIcon,
+} from '@heroicons/react/24/outline';
 
 interface IProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
-  placeholder?:string;
+  placeholder?: string;
   className?: string;
   ariaInvalid?: boolean;
   type: string;
@@ -12,10 +17,9 @@ interface IProps extends React.InputHTMLAttributes<HTMLInputElement> {
   autocomplete?: string;
   autofocus?: boolean;
   inputClassName?: string;
-
 }
 
-const Input:React.FC<IProps> = (
+const Input: React.ForwardRefRenderFunction<HTMLInputElement, IProps> = (
   {
     label,
     placeholder,
@@ -32,12 +36,61 @@ const Input:React.FC<IProps> = (
   },
   ref
 ) => {
+  const [isVisibility, setIsVisibility] = useState<boolean>(false);
+
   return (
-      <div className="flex flex-col">
-        <label className="text-black">{label}</label>
-        <input type={type} placeholder={placeholder} className="p-2 border border-solid border-black"/>
+    <div className="flex flex-col relative">
+      <label className="text-black">{label}</label>
+      <div className="flex items-center">
+        {error && (
+          <div className="absolute right-2 top-8 text-gray-40">
+            <ExclamationCircleIcon
+              className="h-6 w-6 shrink-0 text-red-500 group-hover:text-opacity-80"
+              aria-hidden="true"
+            />
+          </div>
+        )}
+        {type === 'password' && (
+          <div className="absolute left-2 top-8 z-4">
+            <button
+              type="button"
+              onClick={() => setIsVisibility((prev) => !prev)}
+            >
+              {isVisibility ? (
+                <EyeIcon
+                  className="h-6 w-6 shrink-0 text-black group-hover:text-opacity-80"
+                  aria-hidden="true"
+                />
+              ) : (
+                <EyeSlashIcon
+                  className="h-6 w-6 shrink-0 text-black group-hover:text-opacity-80"
+                  aria-hidden="true"
+                />
+              )}
+            </button>
+          </div>
+        )}
+        <input
+          ref={ref}
+          type={type === 'password' ? (isVisibility ? 'text' : type) : type}
+          placeholder={placeholder}
+          {...props}
+          className={`z-1 px-3 py-2 border border-solid border-black w-full ${
+            error ? 'border-red-500' : ''
+          } ${type === 'password' ? 'pl-10' : ''}`}
+          value={value}
+          disabled={disabled}
+          autoFocus={autofocus}
+          autoComplete={autocomplete}
+        />
       </div>
+      {error && (
+        <small role="alert" className="text-red-500">
+          {error}
+        </small>
+      )}
+    </div>
   );
 };
 
-export default Input;
+export default forwardRef(Input);
