@@ -10,8 +10,32 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Sexe {
+  Mr
+  Md
+}
+
 model User {
-  id    String  @id @default(auto()) @map("_id") @db.ObjectId
-  email String  @unique
-  name  String?
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  created_at  DateTime  @default(now())
+  updated_at  DateTime  @updatedAt
+  firstName   String
+  lastName    String
+  email       String    @unique
+  password    String
+  sexe        Sexe      @default(Md)
+  dateOfBirth DateTime?
+  Address     Address[]
+}
+
+model Address {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  lineOne    String
+  city       String
+  country    String
+  pincode    String
+  userId     String   @db.ObjectId
+  user       User     @relation(fields: [userId], references: [id])
 }

@@ -1,6 +1,10 @@
-export default {
-  trailingComma: 'es5',
-  tabWidth: 2,
+module.exports = {
   semi: true,
   singleQuote: true,
+  tabWidth: 2,
+  trailingComma: 'none',
+  bracketSpacing: true,
+  arrowParens: 'always',
+  jsxBracketSameLine: true,
+  importFormatting: 'auto',
 };
