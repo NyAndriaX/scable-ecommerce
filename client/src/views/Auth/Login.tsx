@@ -10,6 +10,11 @@ interface IProps {
   password: string;
 }
 
+const defaultValues = {
+  email: '',
+  password: '',
+};
+
 const Login = () => {
   const {
     register,
@@ -17,10 +22,7 @@ const Login = () => {
     formState: { isSubmitting, isDirty, errors },
   } = useForm<IProps>({
     mode: 'onSubmit',
-    defaultValues: {
-      email: '',
-      password: '',
-    },
+    defaultValues,
   });
 
   const navigate = useNavigate();

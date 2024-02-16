@@ -40,30 +40,30 @@ const Input: React.ForwardRefRenderFunction<HTMLInputElement, IProps> = (
 
   return (
     <div className="flex flex-col relative">
-      <label className="text-black">{label}</label>
+      <label className="text-black mb-1">{label}</label>
       <div className="flex items-center">
         {error && (
-          <div className="absolute right-2 top-8 text-gray-40">
+          <div className="absolute right-2 top-7 text-gray-40">
             <ExclamationCircleIcon
-              className="h-6 w-6 shrink-0 text-red-500 group-hover:text-opacity-80"
+              className="h-5 w-6 shrink-0 text-red-500 group-hover:text-opacity-80"
               aria-hidden="true"
             />
           </div>
         )}
         {type === 'password' && (
-          <div className="absolute left-2 top-8 z-4">
+          <div className="absolute left-2 top-7 z-4">
             <button
               type="button"
               onClick={() => setIsVisibility((prev) => !prev)}
             >
-              {isVisibility ? (
+              {!isVisibility ? (
                 <EyeIcon
-                  className="h-6 w-6 shrink-0 text-black group-hover:text-opacity-80"
+                  className="h-5 w-6 shrink-0 text-black group-hover:text-opacity-80"
                   aria-hidden="true"
                 />
               ) : (
                 <EyeSlashIcon
-                  className="h-6 w-6 shrink-0 text-black group-hover:text-opacity-80"
+                  className="h-5 w-6 shrink-0 text-black group-hover:text-opacity-80"
                   aria-hidden="true"
                 />
               )}
@@ -75,9 +75,7 @@ const Input: React.ForwardRefRenderFunction<HTMLInputElement, IProps> = (
           type={type === 'password' ? (isVisibility ? 'text' : type) : type}
           placeholder={placeholder}
           {...props}
-          className={`z-1 px-3 py-2 border border-solid border-black w-full ${
-            error ? 'border-red-500' : ''
-          } ${type === 'password' ? 'pl-10' : ''}`}
+          className={`z-1 px-3 py-2 w-full ${error && 'border-red-500'} ${type === 'password' ? 'pl-10' : ''}`}
           value={value}
           disabled={disabled}
           autoFocus={autofocus}
