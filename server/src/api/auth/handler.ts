@@ -1,13 +1,30 @@
-import { message } from "../errors/message";
-import { UserInput,User } from "../../typings/user";
-import * as userRepository from "../../database/repository/user.repository"
+import { message } from '../errors/message';
+import { UserRegisterInput, UserLoginInput, User } from '../../typings/user';
+import * as userRepository from '../../database/repository/user.repository';
+import { compareSync } from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
-export async function handleRegister(email:string,data:UserInput):Promise<User>{
-  const user = await userRepository.findByEmail(email)
-  if(user && user.id){
-    throw new Error(message.USER_IS_ALREADY_EXIST)
+export async function handleRegister(
+  email: string,
+  request: UserRegisterInput
+): Promise<User> {
+  const user = await userRepository.findByEmail(email);
+  if (user && user.id) {
+    throw new Error(message.USER_IS_ALREADY_EXIST);
   }
-  return userRepository.save(data)
+  return userRepository.save(request);
 }
 
-// export async function handleLogin() : user
+export async function handleLogin(
+  request: UserLoginInput
+): Promise<{ user: User; token: string }> {
+  const user = await userRepository.findByEmail(request.email);
+  if (!(user && user.id)) {
+    throw new Error(message.USER_DOES_NOT_EXIST);
+  }
+  if (!compareSync(request.password, user.password)) {
+    throw new Error(message.INCORRECT_PASSWORD);
+  }
+  const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET ?? '');
+  return { user, token };
+}

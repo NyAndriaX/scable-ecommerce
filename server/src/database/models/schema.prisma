@@ -21,6 +21,7 @@ model User {
   updated_at  DateTime  @updatedAt
   firstName   String
   lastName    String
+  profil      String?
   email       String    @unique
   password    String
   sexe        Sexe      @default(Md)
@@ -33,6 +34,7 @@ model Address {
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
   lineOne    String
+  lineTwo    String?
   city       String
   country    String
   pincode    String
