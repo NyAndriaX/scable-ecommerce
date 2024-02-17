@@ -571,6 +571,18 @@
   resolved "https://registry.yarnpkg.com/@sindresorhus/merge-streams/-/merge-streams-2.2.0.tgz#b3987287c58b6f1f2b8e8370f01b5a48e1ee3ce8"
   integrity sha512-UTce8mUwUW0RikMb/eseJ7ys0BRkZVFB86orHzrfW12ZmFtym5zua8joZ4L7okH2dDFHkcFjqnZ5GocWBXOFtA==
 
+"@tanstack/query-core@5.21.2":
+  version "5.21.2"
+  resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-5.21.2.tgz#543bc44f09274d965b54640567de4cd8ccbe2831"
+  integrity sha512-jg7OcDG44oLT3uuGQQ9BM65ZBIdAq9xNZXPEk7Gr6w1oM1wo2/95H3dPDjLVs0yZKwrmE/ORUOC2Pyi1sp2fDA==
+
+"@tanstack/react-query@^5.21.2":
+  version "5.21.2"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-query/-/react-query-5.21.2.tgz#6bdf30f8afa7623989ce6b7bfda1a9fefe6b1811"
+  integrity sha512-/Vv1qTumNDDVA5EYk40kivHZ2kICs1w38GBLRvV6A/lrixUJR5bfqZMKqHA1S6ND3gR9hvSyAAYejBbjLrQnSA==
+  dependencies:
+    "@tanstack/query-core" "5.21.2"
+
 "@tanstack/react-virtual@^3.0.0-beta.60":
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/@tanstack/react-virtual/-/react-virtual-3.0.4.tgz#32a90aa6faa2eeebb5f4ca561d26bae9f3435e45"
