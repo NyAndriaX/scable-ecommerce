@@ -5,7 +5,7 @@ import MenuDesktop from './desktop/MenuDesktop';
 const NavBar = () => {
   const previousPosition = useRef(0);
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [scrollDirection, setScrollDirection] = useState<string>('down');
+  const [scrollDirection, setScrollDirection] = useState<string>('up');
 
   useEffect(() => {
     const handleScroll = () => {

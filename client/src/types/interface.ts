@@ -1,9 +1,7 @@
-export type UserToken = string;
+import { SexeType } from "./enum";
 
-export type SexeType = 'Md' | 'Mr';
-
-export interface UserInfo{
-  id: string;
+export interface User{
+  id:string;
   created_at: Date;
   updated_at: Date;
   firstName: string;
@@ -12,4 +10,9 @@ export interface UserInfo{
   password: string;
   sexe: SexeType;
   dateOfBirth: Date | null;
-};
+}
+
+export interface LoginInput{
+  email:string;
+  password:string
+}

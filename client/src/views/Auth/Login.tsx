@@ -4,6 +4,7 @@ import { EMAIL_REGEX } from '@/constants/appConstants';
 import { useNavigate } from 'react-router-dom';
 import Input from '@/components/common/Input/Input';
 import Button from '@/components/common/Button/Button';
+import { useAuthActions } from '@/store/authStore';
 
 interface IProps {
   email: string;
@@ -24,11 +25,11 @@ const Login = () => {
     mode: 'onSubmit',
     defaultValues,
   });
-
+  const { login } = useAuthActions();
   const navigate = useNavigate();
 
-  const submit = (data: IProps) => {
-    console.log(data);
+  const submit = async (data: IProps) => {
+    await login(data);
   };
 
   return (

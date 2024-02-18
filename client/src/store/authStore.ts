@@ -1,71 +1,37 @@
 import { create } from "zustand";
-// import { useMutation } from "@tanstack/react-query";
-// import { useCallback } from "react";
-import { getItem,removeItem,setItem } from "@/utils/storage";
+import {devtools} from "zustand/middleware"
+import { User,LoginInput } from "@/types/interface";
+import { getItem } from "@/utils/storage";
 import { StorageEnum } from "@/types/enum";
-import { UserInfo, UserToken } from "@/types/entity";
-// import { useNavigate } from "react-router-dom";
-// import { LoginReq } from "@/services/authServices";
-// import * as authService from "@/services/authServices";
-import axios,{ AxiosResponse } from "axios";
+import * as authService from "../services/authService"
+import { toast } from "react-toastify";
 
-type AuthStore = {
-  userInfo : Partial<UserInfo>;
-  userToken:UserToken | null;
-  actions:{
-    setUserInfo:(userInfo:UserInfo) => void;
-    setUserToken:(token:UserToken) => void;
-    clearUserInfoAndToken:() => void;
+interface AuthStore{
+  token:string | null;
+  user:User | null;
+  isLoading:boolean;
+  error:string | null;
+  actions :{
+    login : (data:LoginInput) => void;
   }
-};
-
-const useAuthStore = create<AuthStore>((set) => ({
-  userInfo: getItem<UserInfo>(StorageEnum.User) || {},
-  userToken: getItem<UserToken>(StorageEnum.Token) || null,
-  actions: {
-    setUserInfo: (userInfo) => {
-      set({ userInfo });
-      setItem(StorageEnum.User, userInfo);
-    },
-    setUserToken: (userToken) => {
-      set({ userToken });
-      setItem(StorageEnum.Token, userToken);
-    },
-    clearUserInfoAndToken() {
-      set({ userInfo: {}, userToken: null });
-      removeItem(StorageEnum.User);
-      removeItem(StorageEnum.Token);
-    },
-  },
-}));
-
-export const useUserInfo = () => useAuthStore((state) => state.userInfo);
-export const useUserToken = () => useAuthStore((state) => state.userToken);
-export const useUserActions = () => useAuthStore((state) => state.actions);
-
-interface UpdateUserData {
-  userId: string;
-  newData: {
-    name: string;
-    email: string;
-  };
 }
 
-// Fonction de mise à jour de l'utilisateur
-const updateUser = async (userData: UpdateUserData): Promise<AxiosResponse<any, any>> => {
-  try {
-    const response = await axios.put(`/api/users/${userData.userId}`, userData.newData);
-    return response.data;
-  } catch (error) {
-    throw new Error('Failed to update user');
+const useAuthStore = create<AuthStore>()(devtools((set) => ({
+  token: getItem<string | null>(StorageEnum.Token),
+  user: getItem<User | null>(StorageEnum.User),
+  isLoading:false,
+  error:null,
+  actions: {
+    login: async (data: LoginInput) => {
+      try {
+        const res = await authService.login(data);
+        console.log(res)
+      } catch (e:any) {
+        toast.error(e.response?.data.message)
+      }
+
+    }
   }
-};
+})));
 
-export const useLogin = () => {
-  // const navigate = useNavigate();
-  // const { setUserToken, setUserInfo } = useUserActions();
-  
-  // const {mutate,data:updateUserMutation} = useMutation(updateUser);
-  // const loginMutation = useMutation(authService.login);
-
-};
+export const useAuthActions = () => useAuthStore((state) => state.actions) 
