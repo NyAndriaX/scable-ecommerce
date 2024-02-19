@@ -4,22 +4,17 @@ import { useNavigate } from 'react-router-dom';
 import { EMAIL_REGEX } from '@/constants/appConstants';
 import Button from '@/components/common/Button/Button';
 import Input from '@/components/common/Input/Input';
-
-interface IProps {
-  email: string;
-  password: string;
-  firstName: string;
-  sexe: string;
-  lastName: string;
-  dateOfBirth?: string;
-}
+import { RegisterInput } from '#/interface';
+import { toast } from 'react-toastify';
+import * as authService from '@/services/authService';
 
 const defaultValues = {
   email: '',
   password: '',
   firstName: '',
-  sexe: 'MR',
+  sexe: 'Mr' as 'Mr' | 'Md',
   lastName: '',
+  dateOfBirth: null,
 };
 
 const Register = () => {
@@ -30,15 +25,23 @@ const Register = () => {
     register,
     handleSubmit,
     formState: { isSubmitting, isDirty, errors },
-  } = useForm<IProps>({
+    reset,
+  } = useForm<RegisterInput>({
     mode: 'onSubmit',
     defaultValues,
   });
-
   const navigate = useNavigate();
 
-  const submit = (data: IProps) => {
-    console.log(data);
+  const submit = async (data: RegisterInput) => {
+    try {
+      const {statusText} = await authService.register(data);
+      if(statusText === 'OK'){
+        toast.success('Register success');
+        reset();
+      }
+    } catch (e: any) {
+      toast.error(e.response?.data.message);
+    }
   };
 
   return (

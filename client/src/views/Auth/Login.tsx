@@ -4,12 +4,10 @@ import { EMAIL_REGEX } from '@/constants/appConstants';
 import { useNavigate } from 'react-router-dom';
 import Input from '@/components/common/Input/Input';
 import Button from '@/components/common/Button/Button';
+import * as authService from '@/services/authService';
 import { useAuthActions } from '@/store/authStore';
-
-interface IProps {
-  email: string;
-  password: string;
-}
+import { toast } from 'react-toastify';
+import { LoginInput } from '@/types/interface';
 
 const defaultValues = {
   email: '',
@@ -20,17 +18,29 @@ const Login = () => {
   const {
     register,
     handleSubmit,
-    formState: { isSubmitting, isDirty, errors },
-  } = useForm<IProps>({
+    formState: { isSubmitting, isDirty, errors }
+  } = useForm<LoginInput>({
     mode: 'onSubmit',
     defaultValues,
   });
-  const { login } = useAuthActions();
+  const { setUserInfo,setUserToken } = useAuthActions();
   const navigate = useNavigate();
 
-  const submit = async (data: IProps) => {
-    await login(data);
-  };
+  const submit = async (data: LoginInput) =>{
+    try{
+      const res =  await authService.login(data);
+      if(res.statusText === 'OK'){
+        const {user,token} = res.data;
+        if(user && token){
+          setUserInfo(user);
+          setUserToken(token);
+          navigate('/');
+        }
+      }
+    }catch(e:any){
+      toast.error(e.response?.data.message)
+    }
+    };
 
   return (
     <section className="flex flex-col justify-center items-center py-11">

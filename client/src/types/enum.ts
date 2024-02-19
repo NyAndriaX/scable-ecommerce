@@ -1,8 +1,3 @@
-export enum SexeType{
-  Md = 'Md',
-  Mr = 'Mr'
-}
-
 export enum StorageEnum {
   User = 'user',
   Token = 'token',

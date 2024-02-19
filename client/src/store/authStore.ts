@@ -1,10 +1,8 @@
 import { create } from "zustand";
 import {devtools} from "zustand/middleware"
-import { User,LoginInput } from "@/types/interface";
-import { getItem } from "@/utils/storage";
+import { User } from "@/types/interface";
+import { getItem, setItem } from "@/utils/storage";
 import { StorageEnum } from "@/types/enum";
-import * as authService from "../services/authService"
-import { toast } from "react-toastify";
 
 interface AuthStore{
   token:string | null;
@@ -12,7 +10,8 @@ interface AuthStore{
   isLoading:boolean;
   error:string | null;
   actions :{
-    login : (data:LoginInput) => void;
+    setUserToken:(token:string) => void;
+    setUserInfo:(user:User) => void;
   }
 }
 
@@ -22,14 +21,13 @@ const useAuthStore = create<AuthStore>()(devtools((set) => ({
   isLoading:false,
   error:null,
   actions: {
-    login: async (data: LoginInput) => {
-      try {
-        const res = await authService.login(data);
-        console.log(res)
-      } catch (e:any) {
-        toast.error(e.response?.data.message)
-      }
-
+    setUserToken:(token:string) => {
+      set({token:token});
+      setItem(StorageEnum.Token,token);
+    },
+    setUserInfo:(user:User) => {
+      set({user:user});
+      setItem(StorageEnum.User,user)
     }
   }
 })));

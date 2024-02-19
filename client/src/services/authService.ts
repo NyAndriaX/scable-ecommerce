@@ -1,9 +1,11 @@
 import { AuthApi } from "@/types/enum";
-import { LoginInput,User } from "@/types/interface";
+import { LoginInput,RegisterInput,LoginOutput,RegisterOutput } from "@/types/interface";
 import { _get,_post,_delete,_put } from "@/api/apiClient";
 
-const login =(data:LoginInput) => _post<User>(AuthApi.Login,data)
+const login =(data:LoginInput) => _post<LoginOutput>(AuthApi.Login,data)
+const register = (data:RegisterInput) => _post<RegisterOutput>(AuthApi.Register,data)
 
 export {
-  login
+  login,
+  register
 }
