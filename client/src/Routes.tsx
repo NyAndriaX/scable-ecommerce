@@ -1,4 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom';
+import AuthProtectedRoute from './views/AuthProtectedRoute';
 import App from './App';
 import NotFound from './views/NotFound';
 import Home from './views/Home/Home';
@@ -18,12 +19,20 @@ export const router = createBrowserRouter([
       },
       {
         path: '/register',
-        element: <Register />,
+        element: (
+          <AuthProtectedRoute>
+            <Register />
+          </AuthProtectedRoute>
+        ),
       },
 
       {
         path: '/login',
-        element: <Login />,
+        element: (
+          <AuthProtectedRoute>
+            <Login />
+          </AuthProtectedRoute>
+        ),
       },
     ],
   },
