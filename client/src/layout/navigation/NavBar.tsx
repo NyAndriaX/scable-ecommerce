@@ -3,10 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import MenuMobile from './mobile/MenuMobile';
 import MenuDesktop from './desktop/MenuDesktop';
 import { useUserInfo } from '@/store/authStore';
+import { useAuthActions } from '@/store/authStore';
 
 const NavBar = () => {
   const userData = useUserInfo();
   const navigate = useNavigate();
+  const {clearUserAndToken} = useAuthActions();
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const timeoutDuration = 200;
@@ -35,6 +37,8 @@ const NavBar = () => {
     timeout = setTimeout(() => closePopover(), timeoutDuration);
   };
 
+  const logout = async () => await clearUserAndToken();
+
   return (
     <header>
       <MenuDesktop
@@ -43,6 +47,7 @@ const NavBar = () => {
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
         navigate={navigate}
+        logout={logout}
       />
       <MenuMobile isOpen={isOpen} setIsOpen={setIsOpen} />
     </header>

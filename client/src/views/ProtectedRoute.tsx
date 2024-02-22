@@ -9,7 +9,7 @@ interface RouteProps{
 
 const ProtectedRoute:React.FC<RouteProps> = ({children,requireAdmin}) => {
   const user = useUserInfo();
-  if (user) return <Navigate to="/" replace/>;
+  if (!user) return <Navigate to="/" replace/>;
   return <>{children}</>
 }
 

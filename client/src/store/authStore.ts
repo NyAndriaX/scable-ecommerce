@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import {devtools} from "zustand/middleware"
 import { User } from "@/types/interface";
-import { getItem, setItem } from "@/utils/storage";
+import { getItem, removeItem, setItem } from "@/utils/storage";
 import { StorageEnum } from "@/types/enum";
 
 interface AuthStore{
@@ -12,6 +12,7 @@ interface AuthStore{
   actions :{
     setUserToken:(token:string) => void;
     setUserInfo:(user:User) => void;
+    clearUserAndToken:() => void;
   }
 }
 
@@ -28,6 +29,11 @@ const useAuthStore = create<AuthStore>()(devtools((set) => ({
     setUserInfo:(user:User) => {
       set({user:user});
       setItem(StorageEnum.User,user)
+    },
+    clearUserAndToken:() => {
+      set({user:null,token:null}),
+      removeItem(StorageEnum.User);
+      removeItem(StorageEnum.Token)
     }
   }
 })));
