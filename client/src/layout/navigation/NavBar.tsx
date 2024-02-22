@@ -1,40 +1,50 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import MenuMobile from './mobile/MenuMobile';
 import MenuDesktop from './desktop/MenuDesktop';
+import { useUserInfo } from '@/store/authStore';
 
 const NavBar = () => {
-  const previousPosition = useRef(0);
+  const userData = useUserInfo();
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [scrollDirection, setScrollDirection] = useState<string>('up');
 
-  useEffect(() => {
-    const handleScroll = () => {
-      let currentPosition =
-        window.pageYOffset || document.documentElement.scrollTop;
+  const timeoutDuration = 200;
+  let timeout: string | number | NodeJS.Timeout | undefined;
 
-      if (currentPosition > previousPosition.current) {
-        setScrollDirection('down');
-      } else {
-        setScrollDirection('up');
-      }
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
-      previousPosition.current = currentPosition;
-    };
-    window.addEventListener('scroll', handleScroll);
+  const closePopover = () => {
+    return buttonRef.current?.dispatchEvent(
+      new KeyboardEvent('keydown', {
+        key: 'Escape',
+        bubbles: true,
+        cancelable: true,
+      })
+    );
+  };
 
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+  const onMouseEnter = (open: boolean) => {
+    clearTimeout(timeout);
+    if (open) return;
+    return buttonRef.current?.click();
+  };
+
+  const onMouseLeave = (open: boolean) => {
+    if (!open) return;
+    timeout = setTimeout(() => closePopover(), timeoutDuration);
+  };
 
   return (
     <header>
-      <div
-        className={`fixed w-full top-0 left-0 transition-opacity duration-700 z-50 ${scrollDirection === 'up' ? 'opacity-100' : 'opacity-0'}`}
-      >
-        <MenuDesktop setIsOpen={setIsOpen} />
-        <MenuMobile isOpen={isOpen} setIsOpen={setIsOpen} />
-      </div>
+      <MenuDesktop
+        setIsOpen={setIsOpen}
+        userData={userData}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
+        navigate={navigate}
+      />
+      <MenuMobile isOpen={isOpen} setIsOpen={setIsOpen} />
     </header>
   );
 };

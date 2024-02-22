@@ -32,4 +32,6 @@ const useAuthStore = create<AuthStore>()(devtools((set) => ({
   }
 })));
 
+export const useUserInfo = () => useAuthStore((state) => state.user);
+export const useUserToken = () => useAuthStore((state) => state.token);
 export const useAuthActions = () => useAuthStore((state) => state.actions) 

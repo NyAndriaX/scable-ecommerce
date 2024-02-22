@@ -1,5 +1,3 @@
-export type SexeType = "Md" | 'Mr'
-
 export type User = {
   id: string;
   created_at: Date;
@@ -8,7 +6,7 @@ export type User = {
   lastName: string;
   email: string;
   password: string;
-  sexe: SexeType;
+  sexe: 'Md' | 'Mr';
   dateOfBirth: Date | null;
 };
 
@@ -17,7 +15,7 @@ export type UserRegisterInput = {
   lastName: string;
   email: string;
   password: string;
-  sexe: SexeType;
+  sexe: 'Md' | 'Mr';
   dateOfBirth: Date;
 };
 
