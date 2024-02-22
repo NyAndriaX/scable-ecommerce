@@ -1,10 +1,12 @@
-import { createBrowserRouter } from 'react-router-dom';
-import AuthProtectedRoute from './views/AuthProtectedRoute';
 import App from './App';
-import NotFound from './views/NotFound';
 import Home from './views/Home/Home';
-import Register from './views/Auth/Register';
 import Login from './views/Auth/Login';
+import NotFound from './views/NotFound';
+import Register from './views/Auth/Register';
+import Account from './views/Account/Account';
+import { createBrowserRouter } from 'react-router-dom';
+import ProtectedRoute from './views/ProtectedRoute';
+import AuthProtectedRoute from './views/AuthProtectedRoute';
 
 export const router = createBrowserRouter([
   {
@@ -16,6 +18,14 @@ export const router = createBrowserRouter([
         index: true,
         path: '/',
         element: <Home />,
+      },
+      {
+        path: '/account/*',
+        element: (
+          <ProtectedRoute>
+            <Account />
+          </ProtectedRoute>
+        ),
       },
       {
         path: '/register',

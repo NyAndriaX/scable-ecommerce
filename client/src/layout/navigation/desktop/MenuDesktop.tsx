@@ -1,4 +1,5 @@
 import User from '@/components/User';
+import PencilSquareIcon from '@heroicons/react/24/outline/PencilSquareIcon';
 import { User as UserInterface} from '@/types/interface';
 import Logo from '@/components/common/Logo/Logo';
 import { Popover, Transition } from '@headlessui/react';
@@ -87,10 +88,10 @@ const MenuDesktop = forwardRef<HTMLButtonElement, MenuDesktopProps>(
                                      <div className="relative grid  bg-white ">
                                       <div className="p-4">
                                       <Popover.Button
-                                          // onClick={() => navigate('/register')}
+                                          // onClick={() => navigate('/account')}
                                           className="flex w-full items-center rounded-lg p-1 hover:bg-gray-50"
                                         >
-                                          {/* <PencilSquareIcon className="h-4 w-4" /> */}
+                                          <PencilSquareIcon className="h-4 w-4" />
                                           <p className="ml-3 text-base font-medium text-gray-900">
                                             Edit Profile
                                           </p>
