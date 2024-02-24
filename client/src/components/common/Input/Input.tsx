@@ -75,7 +75,7 @@ const Input: React.ForwardRefRenderFunction<HTMLInputElement, IProps> = (
           type={type === 'password' ? (isVisibility ? 'text' : type) : type}
           placeholder={placeholder}
           {...props}
-          className={`z-1 px-3 py-2 w-full ${error && 'border-red-500'} ${type === 'password' ? 'pl-10' : ''}`}
+          className={`z-1 px-3 py-2 w-full ${error && 'border-red-500'} ${type === 'password' ? 'pl-10' : ''} ${inputClassName}`}
           value={value}
           disabled={disabled}
           autoFocus={autofocus}
