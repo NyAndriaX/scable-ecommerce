@@ -27,7 +27,7 @@ function validateRegister(req: Request) {
       sexe: Joi.string().valid('Mr', 'Md').required(),
       email: Joi.string().email().required(),
       password: Joi.string().min(6).max(20).required(),
-      dateOfBirth: Joi.date()
+      dateOfBirth: Joi.date().allow(null).optional()
     }).required()
   );
 }

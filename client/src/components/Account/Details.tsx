@@ -11,7 +11,7 @@ interface DetailsProps {
 const Details: React.FC<DetailsProps> = ({ user }) => (
   <div className="flex flex-col gap-4 w-3/4 px-10">
     <PersonalInfo user={user} />
-    <EmailAddress />
+    <EmailAddress user={user}/>
     <Password />
   </div>
 );

@@ -14,7 +14,7 @@ function validationUpdateUserRequest(req: Request) {
       firstName: Joi.string().required(),
       lastName: Joi.string().required(),
       sexe: Joi.string().valid('Mr', 'Md').required(),
-      dateOfBirth: Joi.date()
+      dateOfBirth: Joi.date().allow(null).optional()
     }).required()
   );
 }

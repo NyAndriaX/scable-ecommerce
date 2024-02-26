@@ -26,7 +26,7 @@ const PersonalInfo: React.FC<PersonalInfoProps> = ({ user }) => {
       dateOfBirth: user?.dateOfBirth
         ? formatDate(user.dateOfBirth.toString())
         : null,
-    },
+    }
   });
   const [selectedValue, setSelectedValue] = useState<string>(
     user?.sexe || 'Mr'
@@ -40,6 +40,7 @@ const PersonalInfo: React.FC<PersonalInfoProps> = ({ user }) => {
 
   const submit = async (data: any) => {
     try {
+      if(data.dateOfBirth === '' ) data.dateOfBirth = null;
       const res: any = await userService.updateUser(user?.id as string, data);
       const { user: newDataUser, token: newDataToken } = res.data;
       if (res.statusText === 'OK' && newDataUser && newDataToken) {
@@ -97,11 +98,11 @@ const PersonalInfo: React.FC<PersonalInfoProps> = ({ user }) => {
               autoComplete="off"
             />
           </div>
-          <div className="flex flex-col w-1/3">
+          <div className="flex flex-col w-1/2">
             <Input
               {...register('dateOfBirth')}
               ariaInvalid={isDirty}
-              label="Date of Birth"
+              label="Date of Birth (Optional)"
               type="date"
               className="mb-3"
               autofocus
@@ -113,7 +114,7 @@ const PersonalInfo: React.FC<PersonalInfoProps> = ({ user }) => {
             text="update"
             type="submit"
             disabled={isSubmitting}
-            className="w-1/3 bg-black hover:bg-opacity-80 py-4 text-white"
+            className="w-1/2 bg-black hover:bg-opacity-80 py-4 text-white"
           />
           <div className="border-b border-gray-300" />
 
