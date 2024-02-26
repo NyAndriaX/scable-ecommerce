@@ -1,0 +1,5 @@
+{
+  "hooks": {
+    "pre-commit": "cd client && yarn run lint:write && yarn run format:write && cd ../server && yarn run lint:write && yarn run format:write"
+  }
+}
