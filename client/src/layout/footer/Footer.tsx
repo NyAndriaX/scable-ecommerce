@@ -2,10 +2,9 @@ import { Link } from 'react-router-dom';
 // import Logo from '@/components/common/Logo/Logo';
 
 export default function Footer() {
-
   return (
     <footer
-      className={`mt-auto border-t border-gray-200`}
+      className="mt-auto border-t border-gray-200"
     >
       <div className="mx-auto flex flex-col items-center ">
         {/* Top area: Blocks */}
@@ -65,7 +64,8 @@ export default function Footer() {
             </ul>
             {/* Copyrights note */}
             <div className="mr-4 text-sm text-gray-600">
-              Made by{' '}
+              Made by
+              {' '}
               {/* Placeholder link */}
               <Link
                 className="text-blue-600 hover:underline"

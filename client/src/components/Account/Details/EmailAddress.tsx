@@ -1,11 +1,11 @@
-import React from 'react'
+import React from 'react';
 
-const EmailAddress = () => {
+function EmailAddress() {
   return (
     <div>
       EmailAddress
     </div>
-  )
+  );
 }
 
-export default EmailAddress
+export default EmailAddress;

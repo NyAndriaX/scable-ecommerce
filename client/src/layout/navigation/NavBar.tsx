@@ -2,13 +2,12 @@ import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MenuMobile from './mobile/MenuMobile';
 import MenuDesktop from './desktop/MenuDesktop';
-import { useUserInfo } from '@/store/authStore';
-import { useAuthActions } from '@/store/authStore';
+import { useUserInfo, useUserActions } from '@/store/userStore';
 
-const NavBar = () => {
+function NavBar() {
   const userData = useUserInfo();
   const navigate = useNavigate();
-  const {clearUserAndToken} = useAuthActions();
+  const { clearUserAndToken } = useUserActions();
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const timeoutDuration = 200;
@@ -16,15 +15,13 @@ const NavBar = () => {
 
   const buttonRef = useRef<HTMLButtonElement>(null);
 
-  const closePopover = () => {
-    return buttonRef.current?.dispatchEvent(
-      new KeyboardEvent('keydown', {
-        key: 'Escape',
-        bubbles: true,
-        cancelable: true,
-      })
-    );
-  };
+  const closePopover = () => buttonRef.current?.dispatchEvent(
+    new KeyboardEvent('keydown', {
+      key: 'Escape',
+      bubbles: true,
+      cancelable: true,
+    }),
+  );
 
   const onMouseEnter = (open: boolean) => {
     clearTimeout(timeout);
@@ -37,7 +34,7 @@ const NavBar = () => {
     timeout = setTimeout(() => closePopover(), timeoutDuration);
   };
 
-  const logout = async () => await clearUserAndToken();
+  const logout = async () => clearUserAndToken();
 
   return (
     <header>
@@ -52,6 +49,6 @@ const NavBar = () => {
       <MenuMobile isOpen={isOpen} setIsOpen={setIsOpen} />
     </header>
   );
-};
+}
 
 export default NavBar;

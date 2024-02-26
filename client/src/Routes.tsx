@@ -1,10 +1,10 @@
+import { createBrowserRouter } from 'react-router-dom';
 import App from './App';
 import Home from './views/Home/Home';
 import Login from './views/Auth/Login';
 import NotFound from './views/NotFound';
 import Register from './views/Auth/Register';
 import Account from './views/Account/Account';
-import { createBrowserRouter } from 'react-router-dom';
 import ProtectedRoute from './views/ProtectedRoute';
 import AuthProtectedRoute from './views/AuthProtectedRoute';
 

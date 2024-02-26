@@ -1,12 +1,11 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 import { EMAIL_REGEX } from '@/constants/appConstants';
-import { useNavigate } from 'react-router-dom';
 import Input from '@/components/common/Input/Input';
 import Button from '@/components/common/Button/Button';
 import * as authService from '@/services/authService';
-import { useAuthActions } from '@/store/authStore';
-import { toast } from 'react-toastify';
+import { useUserActions } from '@/store/userStore';
 import { LoginInput } from '@/types/interface';
 
 const defaultValues = {
@@ -14,33 +13,31 @@ const defaultValues = {
   password: '',
 };
 
-const Login = () => {
+function Login() {
   const {
     register,
     handleSubmit,
-    formState: { isSubmitting, isDirty, errors }
+    formState: { isSubmitting, isDirty, errors },
   } = useForm<LoginInput>({
     mode: 'onSubmit',
     defaultValues,
   });
-  const { setUserInfo,setUserToken } = useAuthActions();
+  const { setUserInfo, setUserToken } = useUserActions();
   const navigate = useNavigate();
 
-  const submit = async (data: LoginInput) =>{
-    try{
-      const res =  await authService.login(data);
-      if(res.statusText === 'OK'){
-        const {user,token} = res.data;
-        if(user && token){
+  const submit = async (data: LoginInput) => {
+    try {
+      const res = await authService.login(data);
+      const { user, token } = res.data;
+      if (res.statusText === 'OK' && user && token) {
           setUserInfo(user);
           setUserToken(token);
           navigate('/');
-        }
       }
-    }catch(e:any){
-      toast.error(e.response?.data.message)
+    } catch (e:any) {
+      toast.error(e.response?.data.message);
     }
-    };
+  };
 
   return (
     <section className="flex flex-col justify-center items-center py-11">
@@ -110,6 +107,6 @@ const Login = () => {
       </div>
     </section>
   );
-};
+}
 
 export default Login;

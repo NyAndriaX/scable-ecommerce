@@ -1,6 +1,6 @@
 import express, { Application } from 'express';
 import bodyParser from 'body-parser';
-import cors from "cors"
+import cors from 'cors';
 import morgan from 'morgan';
 import compression from 'compression';
 

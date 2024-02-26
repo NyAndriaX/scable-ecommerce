@@ -1,7 +1,12 @@
 import React from 'react';
+import { User } from '@/types/interface';
 import { useNavigate } from 'react-router-dom';
 
-const MyAccount: React.FC = () => {
+interface MyAccountProps{
+  user : User | null
+}
+
+const MyAccount: React.FC<MyAccountProps> = () => {
   const navigate = useNavigate();
   return (
     <div className="flex-1 py-10">
@@ -12,7 +17,7 @@ const MyAccount: React.FC = () => {
           onClick={() => navigate('/account/details')}
         >
           <p className="text-xl p-2">Account Details</p>
-          <div className="border border-b"></div>
+          <div className="border border-b" />
           <p className="text-xs p-2 text-gray-500">
             View or change your sign-in information
           </p>
@@ -23,7 +28,7 @@ const MyAccount: React.FC = () => {
           onClick={() => navigate('/account/details')}
         >
           <p className="text-xl p-2">Account Details</p>
-          <div className="border border-b"></div>
+          <div className="border border-b" />
           <p className="text-xs p-2 text-gray-500">
             View or change your sign-in information
           </p>
@@ -34,7 +39,7 @@ const MyAccount: React.FC = () => {
           onClick={() => navigate('/account/details')}
         >
           <p className="text-xl p-2">Account Details</p>
-          <div className="border border-b"></div>
+          <div className="border border-b" />
           <p className="text-xs p-2 text-gray-500">
             View or change your sign-in information
           </p>
@@ -45,7 +50,7 @@ const MyAccount: React.FC = () => {
           onClick={() => navigate('/account/details')}
         >
           <p className="text-xl p-2">Account Details</p>
-          <div className="border border-b"></div>
+          <div className="border border-b" />
           <p className="text-xs p-2 text-gray-500">
             View or change your sign-in information
           </p>

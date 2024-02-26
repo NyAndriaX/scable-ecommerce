@@ -1,5 +1,11 @@
 import { hashSync } from 'bcrypt';
-import { UserRegisterInputType ,UserType,PartialUserType,ForgotPasswordType,ChangeEmailType} from '../../typings/user';
+import {
+  UserRegisterInputType,
+  UserType,
+  PartialUserType,
+  ForgotPasswordType,
+  ChangeEmailType
+} from '../../typings/user';
 import { Context, getContext } from '../context';
 
 const ctx: Context = getContext();
@@ -14,32 +20,37 @@ export async function save(request: UserRegisterInputType): Promise<UserType> {
   });
 }
 
-export async function updateUser(userId:string,request:PartialUserType):Promise<UserType>{
+export async function updateUser(
+  userId: string,
+  request: PartialUserType
+): Promise<UserType> {
   return ctx.prisma.user.update({
-    where:{id:userId},
-    data:request
-  })
+    where: { id: userId },
+    data: request
+  });
 }
 
-export async function updatePassword(userId:string,request:ForgotPasswordType):Promise<UserType>{
-  const {newPassword} =request;
+export async function updatePassword(
+  userId: string,
+  request: ForgotPasswordType
+): Promise<UserType> {
+  const { newPassword } = request;
   return ctx.prisma.user.update({
-    where:{id:userId},
-    data:{
-      password:hashSync(newPassword,10)
+    where: { id: userId },
+    data: {
+      password: hashSync(newPassword, 10)
     }
-  })
+  });
 }
 
-export async function updateEmail(userId:string,newEmail:string){
+export async function updateEmail(userId: string, newEmail: string) {
   return ctx.prisma.user.update({
-    where:{id:userId},
-    data:{
-      email:newEmail
+    where: { id: userId },
+    data: {
+      email: newEmail
     }
-  })
+  });
 }
-
 
 export async function deleteByUserId(userId: string): Promise<UserType> {
   return ctx.prisma.user.delete({
@@ -53,8 +64,8 @@ export async function findByEmail(email: string): Promise<UserType | null> {
   });
 }
 
-export async function findById(id:string):Promise<UserType | null> {
+export async function findById(id: string): Promise<UserType | null> {
   return ctx.prisma.user.findUnique({
-    where: {id}
-  })
+    where: { id }
+  });
 }

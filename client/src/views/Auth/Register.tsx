@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { EMAIL_REGEX } from '@/constants/appConstants';
 import Button from '@/components/common/Button/Button';
 import Input from '@/components/common/Input/Input';
 import { RegisterInput } from '#/interface';
-import { toast } from 'react-toastify';
 import * as authService from '@/services/authService';
 
 const defaultValues = {
@@ -17,9 +17,9 @@ const defaultValues = {
   dateOfBirth: null,
 };
 
-const Register = () => {
+function Register() {
   const [selectedValue, setSelectedValue] = useState<string>(
-    defaultValues.sexe
+    defaultValues.sexe,
   );
   const {
     register,
@@ -34,8 +34,8 @@ const Register = () => {
 
   const submit = async (data: RegisterInput) => {
     try {
-      const {statusText} = await authService.register(data);
-      if(statusText === 'OK'){
+      const { statusText } = await authService.register(data);
+      if (statusText === 'OK') {
         toast.success('Register success');
         reset();
       }
@@ -145,8 +145,12 @@ const Register = () => {
             />
 
             <p className="text-black opacity-30 text-xs">
-              By registering, your account will be subject to the{' '}
-              <span className="underline">Terms and Conditions</span> &{' '}
+              By registering, your account will be subject to the
+              {' '}
+              <span className="underline">Terms and Conditions</span>
+              {' '}
+              &
+              {' '}
               <span className="underline">Privacy Policy</span>
             </p>
 
@@ -171,6 +175,6 @@ const Register = () => {
       </div>
     </section>
   );
-};
+}
 
 export default Register;

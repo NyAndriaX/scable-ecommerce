@@ -13,9 +13,7 @@ export const getItem = <T>(key: StorageEnum): T | null => {
   return value;
 };
 
-export const getStringItem = (key: StorageEnum): string | null => {
-  return localStorage.getItem(key);
-};
+export const getStringItem = (key: StorageEnum): string | null => localStorage.getItem(key);
 
 export const setItem = <T>(key: StorageEnum, value: T): void => {
   localStorage.setItem(key, JSON.stringify(value));

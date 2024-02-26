@@ -1,41 +1,56 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import * as userService from "@/services/userService"
 import Input from '@/components/common/Input/Input';
 import Button from '@/components/common/Button/Button';
+import { User } from '@/types/interface';
+import { toast } from 'react-toastify';
+import { formatDate } from '@/utils/formatDate';
+import { useUserActions } from '@/store/userStore';
 
-const defaultValues = {
-  firstName: '',
-  sexe: 'Mr' as 'Mr' | 'Md',
-  lastName: '',
-  dateOfBirth: null,
-};
+interface PersonalInfoProps{
+  user:User | null
+}
 
-const PersonalInfo: React.FC = () => {
+const PersonalInfo: React.FC<PersonalInfoProps> = ({user}) => {
   const {
     register,
     handleSubmit,
     formState: { isSubmitting, isDirty, errors },
-    reset,
   } = useForm({
     mode: 'onSubmit',
-    defaultValues,
+    defaultValues:{
+      firstName: user?.firstName || '',
+      sexe: user?.sexe || 'Mr',
+      lastName: user?.lastName || '',
+      dateOfBirth:user?.dateOfBirth ? formatDate(user.dateOfBirth.toString()) : null,
+    },
   });
-  const [selectedValue, setSelectedValue] = useState<string>(
-    defaultValues.sexe
-  );
+  const [selectedValue, setSelectedValue] = useState<string>(user?.sexe || 'Mr');
   const [isEditing, setIsEditing] = useState(false);
+  const { setUserInfo, setUserToken } = useUserActions();
 
   const toggleEdit = () => {
     setIsEditing(!isEditing);
   };
 
   const submit = async (data: any) => {
-    console.log(data);
+    try {
+      const res:any = await userService.updateUser(user?.id as string,data);
+      const { user:newDataUser, token:newDataToken } = res.data;
+      if(res.statusText === 'OK' && newDataUser && newDataToken){
+        setUserInfo(newDataUser);
+        setUserToken(newDataToken);
+        toast.success('update success');
+      }
+    } catch (e:any) {
+      toast.error(e.response?.data.message)
+    }
   };
 
   return (
     <div className="flex flex-col border border-gray-300 p-4 gap-6">
-      <h2 className="text-xl">Personal information</h2>
+      <h2 className="text-xl font-bold opacity-90">Personal information</h2>
       {isEditing ? (
         <form
           className="flex flex-col gap-4"
@@ -78,21 +93,17 @@ const PersonalInfo: React.FC = () => {
               autoComplete="off"
             />
           </div>
-          <div>
+          <div className='flex flex-col w-1/3'>
             <Input
-              {...register('dateOfBirth', {
-                required: 'Date of birth is required',
-              })}
-              error={errors.dateOfBirth?.message}
+              {...register('dateOfBirth')}
               ariaInvalid={isDirty}
               label="Date of Birth"
               type="date"
               className="mb-3"
               autofocus
               autoComplete="off"
-              inputClassName="w-1/3"
             />
-            <p className="text-xs text-gray-400">dd,month,year</p>
+            <p className="text-xs text-gray-400">month,dd,year</p>
           </div>
           <Button
             text="update"
@@ -100,7 +111,7 @@ const PersonalInfo: React.FC = () => {
             disabled={isSubmitting}
             className="w-1/3 bg-black hover:bg-opacity-80 py-4 text-white"
           />
-          <div className="border border-b border-gray-300" />
+          <div className="border-b border-gray-300" />
 
           <button type="button" className="contents" onClick={toggleEdit}>
             Cancel
@@ -109,7 +120,7 @@ const PersonalInfo: React.FC = () => {
       ) : (
         <div className="flex flex-col gap-4">
           <p className="text-sm">Mr test test</p>
-          <div className="border border-b border-gray-300" />
+          <div className="border-b border-gray-300" />
           <button type="button" className="contents" onClick={toggleEdit}>
             Edit
           </button>

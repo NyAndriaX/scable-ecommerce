@@ -6,24 +6,22 @@ interface LogoProps {
   width?: string;
 }
 
-const Logo: React.FC<LogoProps> = ({ color, width }) => {
-  return (
-    <React.Fragment>
-      {color === 'white' ? (
-        <img
-          src={LogoWhite}
-          alt="logo"
-          style={{ width: width ? '100px' : "100px", height: 'auto' }}
-        />
-      ) : (
-        <img
-          src={LogoWhite}
-          alt="logo"
-          style={{ width: "100px", height: '100px' }}
-        />
-      )}
-    </React.Fragment>
-  );
-};
+const Logo: React.FC<LogoProps> = ({ color, width }) => (
+  <>
+    {color === 'white' ? (
+      <img
+        src={LogoWhite}
+        alt="logo"
+        style={{ width: width ? '100px' : '100px', height: 'auto' }}
+      />
+    ) : (
+      <img
+        src={LogoWhite}
+        alt="logo"
+        style={{ width: '100px', height: '100px' }}
+      />
+    )}
+  </>
+);
 
 export default Logo;

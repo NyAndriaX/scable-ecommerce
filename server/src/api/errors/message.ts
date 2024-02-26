@@ -7,6 +7,6 @@ export const message = {
   USER_DOES_NOT_EXIST: 'User does not exist',
   USER_IS_ALREADY_EXIST: 'User is already exist',
   INCORRECT_PASSWORD: 'Incorrect password',
-  EMAIL_IS_ALREADY_EXIST:"Email is already exist",
+  EMAIL_IS_ALREADY_EXIST: 'Email is already exist',
   ERROR_DELETE: 'Error delete'
 };

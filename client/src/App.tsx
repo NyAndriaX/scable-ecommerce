@@ -1,19 +1,19 @@
 import React from 'react';
-import NavBar from './layout/navigation/NavBar';
 import { Outlet } from 'react-router-dom';
-import Footer from './layout/footer/Footer';
 import { ToastContainer } from 'react-toastify';
+import NavBar from './layout/navigation/NavBar';
+import Footer from './layout/footer/Footer';
 import 'react-toastify/dist/ReactToastify.css';
 
-const App = () => {
+function App() {
   return (
-    <React.Fragment>
+    <>
       <NavBar />
       <Outlet />
       <Footer />
       <ToastContainer position="top-right" />
-    </React.Fragment>
+    </>
   );
-};
+}
 
 export default App;

@@ -34,7 +34,7 @@ const Input: React.ForwardRefRenderFunction<HTMLInputElement, IProps> = (
     inputClassName,
     ...props
   },
-  ref
+  ref,
 ) => {
   const [isVisibility, setIsVisibility] = useState<boolean>(false);
 
@@ -42,7 +42,7 @@ const Input: React.ForwardRefRenderFunction<HTMLInputElement, IProps> = (
     <div className="flex flex-col relative">
       <label className="text-black mb-1">{label}</label>
       <div className="flex items-center">
-        {error && (
+        {(error && type!=="date") && (
           <div className="absolute right-2 top-7 text-gray-40">
             <ExclamationCircleIcon
               className="h-5 w-6 shrink-0 text-red-500 group-hover:text-opacity-80"

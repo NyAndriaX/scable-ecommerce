@@ -25,14 +25,14 @@ export type UserLoginInputType = {
 };
 
 export type ForgotPasswordType = {
-  currentPassword:string;
-  newPassword:string;
-  confirmNewPassword:string;
-}
+  currentPassword: string;
+  newPassword: string;
+  confirmNewPassword: string;
+};
 
-export type ChangeEmailType={
-  newEmail:string;
-  currentPassword:string;
-}
+export type ChangeEmailType = {
+  newEmail: string;
+  currentPassword: string;
+};
 
 export type PartialUserType = Partial<UserType>;

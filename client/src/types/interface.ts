@@ -1,4 +1,4 @@
-export interface User{
+export interface User {
   id:string;
   created_at: Date;
   updated_at: Date;
@@ -10,17 +10,17 @@ export interface User{
   dateOfBirth: Date | null;
 }
 
-export interface LoginInput{
+export interface LoginInput {
   email:string;
   password:string
 }
 
-export interface LoginOutput{
+export interface LoginOutput {
   user:User | null | undefined;
   token:string | null | undefined
 }
 
-export interface RegisterInput{
+export interface RegisterInput {
   firstName:string;
   lastName:string;
   email:string;
@@ -29,6 +29,17 @@ export interface RegisterInput{
   dateOfBirth:Date | null;
 }
 
-export interface RegisterOutput{
+export interface RegisterOutput {
   id:string | null | undefined
+}
+
+export interface ChangeEmailType{
+  newEmail:string;
+  currentPassword:string;
+}
+
+export interface ForgotPasswordType{
+  currentPassword:string;
+  newPassword:string;
+  confirmNewPassword:string;
 }

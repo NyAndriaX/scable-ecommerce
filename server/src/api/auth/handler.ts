@@ -1,5 +1,9 @@
 import { message } from '../errors/message';
-import { UserType,UserRegisterInputType,UserLoginInputType } from '../../typings/user';
+import {
+  UserType,
+  UserRegisterInputType,
+  UserLoginInputType
+} from '../../typings/user';
 import * as userRepository from '../../database/repository/user.repository';
 import { compareSync } from 'bcrypt';
 import jwt from 'jsonwebtoken';
