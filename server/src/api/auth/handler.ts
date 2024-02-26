@@ -1,13 +1,13 @@
 import { message } from '../errors/message';
-import { UserRegisterInput, UserLoginInput, User } from '../../typings/user';
+import { UserType,UserRegisterInputType,UserLoginInputType } from '../../typings/user';
 import * as userRepository from '../../database/repository/user.repository';
 import { compareSync } from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 export async function handleRegister(
   email: string,
-  request: UserRegisterInput
-): Promise<User> {
+  request: UserRegisterInputType
+): Promise<UserType> {
   const user = await userRepository.findByEmail(email);
   if (user && user.id) {
     throw new Error(message.USER_IS_ALREADY_EXIST);
@@ -16,8 +16,8 @@ export async function handleRegister(
 }
 
 export async function handleLogin(
-  request: UserLoginInput
-): Promise<{ user: User; token: string }> {
+  request: UserLoginInputType
+): Promise<{ user: UserType; token: string }> {
   const user = await userRepository.findByEmail(request.email);
   if (!(user && user.id)) {
     throw new Error(message.USER_DOES_NOT_EXIST);

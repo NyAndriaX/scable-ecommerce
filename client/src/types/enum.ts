@@ -7,3 +7,6 @@ export enum AuthApi{
   Login = '/auth/login',
   Register = '/auth/register'
 }
+
+export enum UserApi{
+}

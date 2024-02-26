@@ -1,4 +1,4 @@
-export type User = {
+export type UserType = {
   id: string;
   created_at: Date;
   updated_at: Date;
@@ -10,16 +10,29 @@ export type User = {
   dateOfBirth: Date | null;
 };
 
-export type UserRegisterInput = {
+export type UserRegisterInputType = {
   firstName: string;
   lastName: string;
   email: string;
   password: string;
   sexe: 'Md' | 'Mr';
-  dateOfBirth: Date;
+  dateOfBirth: Date | null;
 };
 
-export type UserLoginInput = {
+export type UserLoginInputType = {
   email: string;
   password: string;
 };
+
+export type ForgotPasswordType = {
+  currentPassword:string;
+  newPassword:string;
+  confirmNewPassword:string;
+}
+
+export type ChangeEmailType={
+  newEmail:string;
+  currentPassword:string;
+}
+
+export type PartialUserType = Partial<UserType>;
