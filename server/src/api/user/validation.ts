@@ -27,7 +27,6 @@ function validationUpdatePasswordRequest(req: Request) {
       id: Joi.string().required(),
       currentPassword: Joi.string().required(),
       newPassword: Joi.string().required(),
-      confirmNewPassword: Joi.string().valid(Joi.ref('newPassword')).required()
     })
   );
 }

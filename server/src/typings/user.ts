@@ -27,7 +27,6 @@ export type UserLoginInputType = {
 export type ForgotPasswordType = {
   currentPassword: string;
   newPassword: string;
-  confirmNewPassword: string;
 };
 
 export type ChangeEmailType = {
