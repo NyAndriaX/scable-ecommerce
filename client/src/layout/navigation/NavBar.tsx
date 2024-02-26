@@ -15,13 +15,14 @@ function NavBar() {
 
   const buttonRef = useRef<HTMLButtonElement>(null);
 
-  const closePopover = () => buttonRef.current?.dispatchEvent(
-    new KeyboardEvent('keydown', {
-      key: 'Escape',
-      bubbles: true,
-      cancelable: true,
-    }),
-  );
+  const closePopover = () =>
+    buttonRef.current?.dispatchEvent(
+      new KeyboardEvent('keydown', {
+        key: 'Escape',
+        bubbles: true,
+        cancelable: true,
+      })
+    );
 
   const onMouseEnter = (open: boolean) => {
     clearTimeout(timeout);

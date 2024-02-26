@@ -11,5 +11,5 @@ export enum AuthApi {
 export enum UserApi {
   UpdateUser = '/user',
   updatePassword = '/user/password',
-  updateEmail = '/user/email'
+  updateEmail = '/user/email',
 }

@@ -38,4 +38,3 @@ export default {
 > yarn add @heroicons/react
 
 Your docs : https://github.com/tailwindlabs/heroicons
-

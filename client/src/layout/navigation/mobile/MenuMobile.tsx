@@ -10,11 +10,7 @@ interface MenuMobileProps {
 
 const MenuMobile: React.FC<MenuMobileProps> = ({ isOpen, setIsOpen }) => (
   <Transition.Root show={isOpen} as={Fragment}>
-    <Dialog
-      as="div"
-      className="relative z-10"
-      onClose={() => setIsOpen(false)}
-    >
+    <Dialog as="div" className="relative z-10" onClose={() => setIsOpen(false)}>
       <Transition.Child
         as={Fragment}
         enter="ease-out duration-300"
@@ -57,9 +53,7 @@ const MenuMobile: React.FC<MenuMobileProps> = ({ isOpen, setIsOpen }) => (
                 {/* List des categorie ... */}
               </div>
               <Tab.Panels className="mt-2">
-                <Tab.Panel>
-                  {/* List des models ... */}
-                </Tab.Panel>
+                <Tab.Panel>{/* List des models ... */}</Tab.Panel>
               </Tab.Panels>
             </Tab.Group>
 

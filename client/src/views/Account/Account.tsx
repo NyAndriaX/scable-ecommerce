@@ -16,8 +16,8 @@ const Account: React.FC = () => {
       <div className="flex flex-row">
         <Sidebar />
         <Routes>
-          <Route path="/" element={<MyAccount user={user}/>} />
-          <Route path="/details" element={<Details user={user}/>} />
+          <Route path="/" element={<MyAccount user={user} />} />
+          <Route path="/details" element={<Details user={user} />} />
         </Routes>
       </div>
     </div>

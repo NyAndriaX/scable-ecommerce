@@ -16,27 +16,19 @@ const User: React.FC<UserType> = ({
 }) => (
   <>
     {!mobile && (
-    <p className="mr-2" style={{ display: 'grid', alignContent: 'center' }}>
-      {lastName}
-      {' '}
-      {firstName}
-    </p>
+      <p className="mr-2" style={{ display: 'grid', alignContent: 'center' }}>
+        {lastName} {firstName}
+      </p>
     )}
     <img
       className="h-10 w-10 rounded-full border border-gray-300"
-      src={
-          photoURL === 'default' || !photoURL
-            ? PhotoDefaultURL
-            : photoURL
-        }
+      src={photoURL === 'default' || !photoURL ? PhotoDefaultURL : photoURL}
       alt={firstName ?? 'Anonymous'}
     />
     {mobile && (
-    <p className="ml-2" style={{ display: 'grid', alignContent: 'center' }}>
-      {lastName}
-      {' '}
-      {firstName}
-    </p>
+      <p className="ml-2" style={{ display: 'grid', alignContent: 'center' }}>
+        {lastName} {firstName}
+      </p>
     )}
   </>
 );

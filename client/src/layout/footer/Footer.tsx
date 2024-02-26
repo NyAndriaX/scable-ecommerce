@@ -3,9 +3,7 @@ import { Link } from 'react-router-dom';
 
 export default function Footer() {
   return (
-    <footer
-      className="mt-auto border-t border-gray-200"
-    >
+    <footer className="mt-auto border-t border-gray-200">
       <div className="mx-auto flex flex-col items-center ">
         {/* Top area: Blocks */}
         <div className="grid w-full max-w-7xl gap-8 py-8 px-4 sm:grid-cols-12 sm:px-6 md:py-12">
@@ -38,7 +36,6 @@ export default function Footer() {
           </div>
 
           {/* More blocks here */}
-
         </div>
 
         {/* Bottom area */}
@@ -64,9 +61,7 @@ export default function Footer() {
             </ul>
             {/* Copyrights note */}
             <div className="mr-4 text-sm text-gray-600">
-              Made by
-              {' '}
-              {/* Placeholder link */}
+              Made by {/* Placeholder link */}
               <Link
                 className="text-blue-600 hover:underline"
                 target="_blank"

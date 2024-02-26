@@ -19,7 +19,7 @@ const defaultValues = {
 
 function Register() {
   const [selectedValue, setSelectedValue] = useState<string>(
-    defaultValues.sexe,
+    defaultValues.sexe
   );
   const {
     register,
@@ -145,12 +145,8 @@ function Register() {
             />
 
             <p className="text-black opacity-30 text-xs">
-              By registering, your account will be subject to the
-              {' '}
-              <span className="underline">Terms and Conditions</span>
-              {' '}
-              &
-              {' '}
+              By registering, your account will be subject to the{' '}
+              <span className="underline">Terms and Conditions</span> &{' '}
               <span className="underline">Privacy Policy</span>
             </p>
 

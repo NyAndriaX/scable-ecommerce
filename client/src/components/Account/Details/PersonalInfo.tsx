@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import * as userService from "@/services/userService"
+import * as userService from '@/services/userService';
 import Input from '@/components/common/Input/Input';
 import Button from '@/components/common/Button/Button';
 import { User } from '@/types/interface';
@@ -8,25 +8,29 @@ import { toast } from 'react-toastify';
 import { formatDate } from '@/utils/formatDate';
 import { useUserActions } from '@/store/userStore';
 
-interface PersonalInfoProps{
-  user:User | null
+interface PersonalInfoProps {
+  user: User | null;
 }
 
-const PersonalInfo: React.FC<PersonalInfoProps> = ({user}) => {
+const PersonalInfo: React.FC<PersonalInfoProps> = ({ user }) => {
   const {
     register,
     handleSubmit,
     formState: { isSubmitting, isDirty, errors },
   } = useForm({
     mode: 'onSubmit',
-    defaultValues:{
+    defaultValues: {
       firstName: user?.firstName || '',
       sexe: user?.sexe || 'Mr',
       lastName: user?.lastName || '',
-      dateOfBirth:user?.dateOfBirth ? formatDate(user.dateOfBirth.toString()) : null,
+      dateOfBirth: user?.dateOfBirth
+        ? formatDate(user.dateOfBirth.toString())
+        : null,
     },
   });
-  const [selectedValue, setSelectedValue] = useState<string>(user?.sexe || 'Mr');
+  const [selectedValue, setSelectedValue] = useState<string>(
+    user?.sexe || 'Mr'
+  );
   const [isEditing, setIsEditing] = useState(false);
   const { setUserInfo, setUserToken } = useUserActions();
 
@@ -36,15 +40,15 @@ const PersonalInfo: React.FC<PersonalInfoProps> = ({user}) => {
 
   const submit = async (data: any) => {
     try {
-      const res:any = await userService.updateUser(user?.id as string,data);
-      const { user:newDataUser, token:newDataToken } = res.data;
-      if(res.statusText === 'OK' && newDataUser && newDataToken){
+      const res: any = await userService.updateUser(user?.id as string, data);
+      const { user: newDataUser, token: newDataToken } = res.data;
+      if (res.statusText === 'OK' && newDataUser && newDataToken) {
         setUserInfo(newDataUser);
         setUserToken(newDataToken);
         toast.success('update success');
       }
-    } catch (e:any) {
-      toast.error(e.response?.data.message)
+    } catch (e: any) {
+      toast.error(e.response?.data.message);
     }
   };
 
@@ -93,7 +97,7 @@ const PersonalInfo: React.FC<PersonalInfoProps> = ({user}) => {
               autoComplete="off"
             />
           </div>
-          <div className='flex flex-col w-1/3'>
+          <div className="flex flex-col w-1/3">
             <Input
               {...register('dateOfBirth')}
               ariaInvalid={isDirty}
@@ -119,7 +123,9 @@ const PersonalInfo: React.FC<PersonalInfoProps> = ({user}) => {
         </form>
       ) : (
         <div className="flex flex-col gap-4">
-          <p className="text-sm">Mr test test</p>
+          <p className="text-sm">
+            {user?.sexe} {user?.firstName} {user?.lastName}
+          </p>
           <div className="border-b border-gray-300" />
           <button type="button" className="contents" onClick={toggleEdit}>
             Edit

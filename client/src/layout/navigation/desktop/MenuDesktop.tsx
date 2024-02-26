@@ -1,10 +1,9 @@
 import { Popover, Transition } from '@headlessui/react';
 import { Link, NavigateFunction } from 'react-router-dom';
+import { Dispatch, forwardRef, SetStateAction, Fragment } from 'react';
 import {
-  Dispatch, forwardRef, SetStateAction, Fragment,
-} from 'react';
-import {
-  Bars3Icon, ShoppingBagIcon,
+  Bars3Icon,
+  ShoppingBagIcon,
   ArrowLeftOnRectangleIcon,
   PencilSquareIcon,
 } from '@heroicons/react/24/outline';
@@ -23,10 +22,8 @@ interface MenuDesktopProps {
 
 const MenuDesktop = forwardRef<HTMLButtonElement, MenuDesktopProps>(
   (
-    {
-      logout, setIsOpen, userData, onMouseEnter, onMouseLeave, navigate,
-    },
-    ref,
+    { logout, setIsOpen, userData, onMouseEnter, onMouseLeave, navigate },
+    ref
   ) => (
     <nav className="relative">
       <div
@@ -68,85 +65,85 @@ const MenuDesktop = forwardRef<HTMLButtonElement, MenuDesktopProps>(
               <div className="hidden items-center justify-end md:flex md:flex-1">
                 {/* connected */}
                 {userData && (
-                <Popover className="relative hidden leading-3 md:block">
-                  {({ open }) => (
-                    <div onMouseLeave={onMouseLeave.bind(null, open)}>
-                      <Popover.Button
-                        className={`group inline-flex items-center rounder-md text-base font-medium hover:text-gray-900 focus:outil-none ${open ? 'text-gray-900' : 'text-gray-500'}`}
-                        ref={ref}
-                        onMouseEnter={onMouseEnter.bind(null, open)}
-                        onMouseLeave={onMouseLeave.bind(null, open)}
-                      >
-                        <User
-                          mobile={false}
-                          lastName={userData.lastName}
-                          firstName={userData.firstName}
-                        />
-                      </Popover.Button>
-                      <Transition
-                        as={Fragment}
-                        enter="transition ease-out duration-200"
-                        enterFrom="opacity-0 translate-y-1"
-                        enterTo="opacity-100 translate-y-0"
-                        leave="transition ease-in duration-150"
-                        leaveFrom="opacity-100 translate-y-0"
-                        leaveTo="opacity-0 translate-y-1"
-                      >
-                        <Popover.Panel className="absolute left-35 z-50 mt-0 w-[250px] max-w-sm -translate-x-1/2 px-3 pt-3 sm:px-0 lg:max-w-3xl">
-                          <div
-                            className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black/5"
-                            onMouseEnter={() => onMouseEnter.bind(null, open)}
-                            onMouseLeave={() => onMouseLeave.bind(null, open)}
-                          >
-                            <div className="relative grid  bg-white ">
-                              <div className="p-4">
+                  <Popover className="relative hidden leading-3 md:block">
+                    {({ open }) => (
+                      <div onMouseLeave={onMouseLeave.bind(null, open)}>
+                        <Popover.Button
+                          className={`group inline-flex items-center rounder-md text-base font-medium hover:text-gray-900 focus:outil-none ${open ? 'text-gray-900' : 'text-gray-500'}`}
+                          ref={ref}
+                          onMouseEnter={onMouseEnter.bind(null, open)}
+                          onMouseLeave={onMouseLeave.bind(null, open)}
+                        >
+                          <User
+                            mobile={false}
+                            lastName={userData.lastName}
+                            firstName={userData.firstName}
+                          />
+                        </Popover.Button>
+                        <Transition
+                          as={Fragment}
+                          enter="transition ease-out duration-200"
+                          enterFrom="opacity-0 translate-y-1"
+                          enterTo="opacity-100 translate-y-0"
+                          leave="transition ease-in duration-150"
+                          leaveFrom="opacity-100 translate-y-0"
+                          leaveTo="opacity-0 translate-y-1"
+                        >
+                          <Popover.Panel className="absolute left-35 z-50 mt-0 w-[250px] max-w-sm -translate-x-1/2 px-3 pt-3 sm:px-0 lg:max-w-3xl">
+                            <div
+                              className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black/5"
+                              onMouseEnter={() => onMouseEnter.bind(null, open)}
+                              onMouseLeave={() => onMouseLeave.bind(null, open)}
+                            >
+                              <div className="relative grid  bg-white ">
+                                <div className="p-4">
+                                  <Popover.Button
+                                    onClick={() => navigate('/account')}
+                                    className="flex w-full items-center rounded-lg p-1 hover:bg-gray-50"
+                                  >
+                                    <PencilSquareIcon className="h-4 w-4" />
+                                    <p className="ml-3 text-base font-medium text-gray-900">
+                                      Edit Profile
+                                    </p>
+                                  </Popover.Button>
+                                </div>
+                              </div>
+                              <div className="flex items-center bg-gray-50 py-4 px-8">
                                 <Popover.Button
-                                  onClick={() => navigate('/account')}
-                                  className="flex w-full items-center rounded-lg p-1 hover:bg-gray-50"
+                                  className="flex items-center text-sm font-medium text-violet-500 hover:text-violet-600"
+                                  onClick={logout}
                                 >
-                                  <PencilSquareIcon className="h-4 w-4" />
-                                  <p className="ml-3 text-base font-medium text-gray-900">
-                                    Edit Profile
+                                  <ArrowLeftOnRectangleIcon className="h-4 w-4" />
+                                  <p className="ml-3 text-base font-medium text-violet-500">
+                                    Sign out
                                   </p>
                                 </Popover.Button>
                               </div>
                             </div>
-                            <div className="flex items-center bg-gray-50 py-4 px-8">
-                              <Popover.Button
-                                className="flex items-center text-sm font-medium text-violet-500 hover:text-violet-600"
-                                onClick={logout}
-                              >
-                                <ArrowLeftOnRectangleIcon className="h-4 w-4" />
-                                <p className="ml-3 text-base font-medium text-violet-500">
-                                  Sign out
-                                </p>
-                              </Popover.Button>
-                            </div>
-                          </div>
-                        </Popover.Panel>
-                      </Transition>
-                    </div>
-                  )}
-                </Popover>
+                          </Popover.Panel>
+                        </Transition>
+                      </div>
+                    )}
+                  </Popover>
                 )}
               </div>
               {/* Not connected */}
               {!userData && (
-              <>
-                <Link
-                  to="/login"
-                  className="text-sm font-medium text-white hover:text-opacity-80"
-                >
-                  Sign in
-                </Link>
-                <span className="h-6 w-px bg-gray-200" aria-hidden="true" />
-                <Link
-                  to="/register"
-                  className="text-sm font-medium text-white hover:text-opacity-80"
-                >
-                  Create account
-                </Link>
-              </>
+                <>
+                  <Link
+                    to="/login"
+                    className="text-sm font-medium text-white hover:text-opacity-80"
+                  >
+                    Sign in
+                  </Link>
+                  <span className="h-6 w-px bg-gray-200" aria-hidden="true" />
+                  <Link
+                    to="/register"
+                    className="text-sm font-medium text-white hover:text-opacity-80"
+                  >
+                    Create account
+                  </Link>
+                </>
               )}
             </div>
           </div>
@@ -164,7 +161,7 @@ const MenuDesktop = forwardRef<HTMLButtonElement, MenuDesktopProps>(
         </div>
       </div>
     </nav>
-  ),
+  )
 );
 
 export default MenuDesktop;

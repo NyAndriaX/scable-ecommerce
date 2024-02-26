@@ -3,10 +3,10 @@ import { Navigate } from 'react-router-dom';
 import { useUserInfo } from '@/store/userStore';
 
 interface RouteProps {
-  children:ReactNode
+  children: ReactNode;
 }
 
-const AuthProtectedRoute:React.FC<RouteProps> = ({ children }) => {
+const AuthProtectedRoute: React.FC<RouteProps> = ({ children }) => {
   const user = useUserInfo();
   if (user) return <Navigate to="/" replace />;
   return <>{children}</>;

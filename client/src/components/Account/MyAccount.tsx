@@ -2,8 +2,8 @@ import React from 'react';
 import { User } from '@/types/interface';
 import { useNavigate } from 'react-router-dom';
 
-interface MyAccountProps{
-  user : User | null
+interface MyAccountProps {
+  user: User | null;
 }
 
 const MyAccount: React.FC<MyAccountProps> = () => {

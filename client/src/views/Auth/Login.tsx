@@ -30,11 +30,11 @@ function Login() {
       const res = await authService.login(data);
       const { user, token } = res.data;
       if (res.statusText === 'OK' && user && token) {
-          setUserInfo(user);
-          setUserToken(token);
-          navigate('/');
+        setUserInfo(user);
+        setUserToken(token);
+        navigate('/');
       }
-    } catch (e:any) {
+    } catch (e: any) {
       toast.error(e.response?.data.message);
     }
   };
