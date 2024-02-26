@@ -11,7 +11,7 @@ export async function handleUpdateUser(id:string,data:PartialUserType):Promise<U
   return userRepository.updateUser(id,data);
 }
 
-export async function handleUpdatePassword(id:string,data:ForgotPasswordType){
+export async function handleUpdatePassword(id:string,data:ForgotPasswordType):Promise<UserType>{
   const user = await userRepository.findById(id);
 
   if(!(user && user.id)){
