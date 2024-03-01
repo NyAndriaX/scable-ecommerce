@@ -14,7 +14,7 @@ const Account: React.FC = () => {
         <h1>My Account</h1>
       </div>
       <div className="flex flex-row">
-        <Sidebar />
+        <Sidebar/>
         <Routes>
           <Route path="/" element={<MyAccount user={user} />} />
           <Route path="/details" element={<Details user={user} />} />
